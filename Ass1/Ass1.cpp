@@ -155,52 +155,35 @@ bool IsBeforeInt(int& a, int& b)
 
 
 int main() {
-    // Test Array
-    Array<int> arr;
-    arr.Initialize();
+    int number;
+    cout << "Please Enter How many numbers you want to add: " << endl;
 
-    cout << "Testing Array:" << endl;
-    for (int i = 0; i < 10; i++) {
-        arr.AddLast(i);
-        cout << "Added " << i << ", Array size: " << arr.n << ", Capacity: " << arr.sz << endl;
-    }
-
-    cout << "Array contents: ";
-    for (int i = 0; i < arr.n; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-
-    // Remove last element
-    arr.RemoveLast();
-    cout << "Removed last element, new size: " << arr.n << endl;
-
-    // Print final array contents
-    cout << "Final Array contents: ";
-    for (int i = 0; i < arr.n; i++) {
-        cout << arr[i] << " ";
-    }
-    cout << endl;
-
-    arr.Destroy();
-
-    // Test Heap
+    cin >> number ;
     Heap<int> heap;
     heap.Initialize(IsBeforeInt);
 
-    cout << "\nTesting Heap:" << endl;
-    for (int i = 10; i > 0; i--) {
-        heap.Add(i);
-        cout << "Added " << i << ", Heap first element: " << heap.GetFirst() << endl;
+        
+    for (int i = 0; i < number; i++) {
+        int num;
+        cout << "Enter Number" << i+1 << ": "<<endl  ;
+        cin >> num;
+        heap.Add(num);
     }
 
-    cout << "Heap contents after all additions (retrieve in order): ";
-    while (heap.a.n > 0) {
-        cout << heap.RetrieveFirst() << " ";
-    }
-    cout << endl;
+    int totalCost = 0;
 
+        
+    while (heap.a.n > 1) {
+        int first = heap.RetrieveFirst();
+        int second = heap.RetrieveFirst();
+        int sum = first + second;
+        totalCost  = totalCost + sum;
+        heap.Add(sum); 
+    }
+
+    cout <<"Total Cost: "<< totalCost << endl;
+
+    
     heap.Destroy();
-
     return 0;
 }
