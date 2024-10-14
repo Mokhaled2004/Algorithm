@@ -155,35 +155,35 @@ bool IsBeforeInt(int& a, int& b)
 
 
 int main() {
-    int number;
-    cout << "Please Enter How many numbers you want to add: " << endl;
+    while (true) {
+        int number;
+        cin >> number;
 
-    cin >> number ;
-    Heap<int> heap;
-    heap.Initialize(IsBeforeInt);
+        if (number == 0) break;  
 
-        
-    for (int i = 0; i < number; i++) {
-        int num;
-        cout << "Enter Number" << i+1 << ": "<<endl  ;
-        cin >> num;
-        heap.Add(num);
+        Heap<int> heap;
+        heap.Initialize(IsBeforeInt);
+
+        for (int i = 0; i < number; i++) {
+            int num;
+            cin >> num;
+            heap.Add(num);
+        }
+
+        int totalCost = 0;
+
+        while (heap.a.n > 1) {
+            int first = heap.RetrieveFirst();
+            int second = heap.RetrieveFirst();
+            int sum = first + second;
+            totalCost += sum;
+            heap.Add(sum);
+        }
+
+        cout << totalCost << endl;
+
+        heap.Destroy();
     }
 
-    int totalCost = 0;
-
-        
-    while (heap.a.n > 1) {
-        int first = heap.RetrieveFirst();
-        int second = heap.RetrieveFirst();
-        int sum = first + second;
-        totalCost  = totalCost + sum;
-        heap.Add(sum); 
-    }
-
-    cout <<"Total Cost: "<< totalCost << endl;
-
-    
-    heap.Destroy();
     return 0;
 }
